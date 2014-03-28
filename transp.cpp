@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <algorithm>
+
+void transpose(char *buf, unsigned int nRowsCols)	{
+	unsigned int *uibuf = (unsigned int *)buf;
+	for(unsigned int i=0; i<nRowsCols; ++i)	{
+		for(unsigned int j=i+1; j<nRowsCols; ++j)	{
+			std::swap(uibuf[i*nRowsCols + j], uibuf[j*nRowsCols + i]);
+		}
+	}
+}
+
+
+int main(void)	{
+	char mat[][12] = 
+		{{0x0,0x0,0x0,0x0, 0x0,0x0,0x0,0x1, 0x0,0x0,0x0,0x2},
+		{0x0,0x0,0x1,0x0, 0x0,0x1,0x0,0x1, 0x1,0x0,0x0,0x2},
+		{0x0,0x0,0x2,0x0, 0x0,0x2,0x0,0x1, 0x2,0x0,0x0,0x2}};
+	transpose(mat[0], 3);
+	for(unsigned int i=0; i<3; ++i)	{
+		for(unsigned int j=0; j<12; ++j)	{
+			printf("%x ", mat[i][j]);
+			if(j%4 == 3)
+				printf("   ");
+		}
+		printf("\n");
+	}
+}
+
+
+
